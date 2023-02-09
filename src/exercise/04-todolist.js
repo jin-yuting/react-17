@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 export default class Todolist extends Component {
   myref = React.createRef()
   state = {
-    list:[{id:1,text:'测试'}]
+    list:[
+      {id:1,text:'测试'},
+    ]
   }
   render() {
     return (
