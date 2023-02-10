@@ -23,7 +23,7 @@ export default class Cinema extends Component {
   render() {
     return (
       <div>
-        <input onInput={()=>this.handleClick} />
+        <input className='cinema-input' onInput={ this.handleClick } />
           {
             this.state.cinemasList.map((item,index)=>
               <dl key={index}>
@@ -36,7 +36,12 @@ export default class Cinema extends Component {
     )
   }
 
-  handleClick(event){
-    console.log(event.target);
+  handleClick = (event)=>{
+    let newList = this.state.cinemasList.filter(item=>item.name.toUpperCase().includes(event.target.value.toUpperCase()))
+    console.log(newList,'newList');
+    // 存在问题：cinemasList 每次都会重新覆盖
+    this.setState({
+      cinemasList: newList
+    })
   }
 }

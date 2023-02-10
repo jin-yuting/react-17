@@ -32,3 +32,7 @@ dl dt{
 dl dd{
   font-size: 12px;
 }
+.cinema-input{
+  height: 35px;
+  width: 99%;
+}
