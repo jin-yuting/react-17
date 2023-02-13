@@ -4,18 +4,25 @@ export default class Todolist extends Component {
   myref = React.createRef()
   state = {
     list:[
-      {id:1,text:'测试'},
-    ]
+      {id:1,text:'测试',isChecked: false},
+    ],
+    mytext:''
   }
   render() {
     return (
       <div>
-        <input ref={this.myref} />
+        {/* <input ref={this.myref} /> */}
+        <input value={this.state.mytext} onChange={(evt)=>{
+          this.setState({
+            mytext:evt.target.value
+          })
+        }}></input>
         <button onClick={ this.handleClick }>添加</button>
         <ul>
           {
             this.state.list.map( (item,index)=>
             <li key={item.id}>
+              <input type='checkbox' checked={item.isChecked} onChange={()=>this.handleChecked(index)}></input>
               {item.text}
               {/* 富文本展示 */}
               {/* <span dangerouslySetInnerHTML={{
@@ -30,15 +37,22 @@ export default class Todolist extends Component {
       </div>
     )
   }
-
+  handleChecked = (index)=>{
+    let newList = [...this.state.list]
+    newList[index].isChecked = !newList[index].isChecked
+    this.setState({
+      list:newList
+    })
+  }
   handleClick = ()=>{
     let newList = [...this.state.list]
     newList.push({
       id: Math.random()*10000000,
-      text: this.myref.current.value
+      text: this.state.mytext
     })
     this.setState({
-      list:newList
+      list:newList,
+      mytext: ''
     })
   }
   handleDelete = (index)=>{

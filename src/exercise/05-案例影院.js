@@ -16,7 +16,7 @@ export default class App extends Component {
   which(){
     switch(this.state.current){
       case 0:
-        return <Film></Film>
+        return <Film title='标题'></Film>
       case 1:
         return <Cinema></Cinema>
         case 2:

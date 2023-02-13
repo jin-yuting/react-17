@@ -15,17 +15,25 @@ export default class Cinema extends Component {
         cinemasList: data.data.cinemas
       })
     })
+    this.state = {
+      cinemasList: [],
+      mytext:''
+    }
   }
-  state = {
-    cinemasList: []
-  }
+  
     
   render() {
     return (
       <div>
-        <input className='cinema-input' onInput={ this.handleClick } />
+        <input value={this.state.mytext} className='cinema-input' 
+        onChange={ (evt)=>{
+          this.setState({
+            mytext:evt.target.value
+          })
+          }} />
+
           {
-            this.state.cinemasList.map((item,index)=>
+            this.getCinemaList.map((item,index)=>
               <dl key={index}>
                 <dt>{item.name}</dt>
                 <dd>{item.address}</dd>
@@ -35,7 +43,9 @@ export default class Cinema extends Component {
       </div>
     )
   }
-
+  getCinemaList(){
+    return this.state.cinemasList.filter(item=>item.name.toUpperCase().includes(this.state.mytext.toUpperCase()))
+  }
   handleClick = (event)=>{
     let newList = this.state.cinemasList.filter(item=>item.name.toUpperCase().includes(event.target.value.toUpperCase()))
     console.log(newList,'newList');
