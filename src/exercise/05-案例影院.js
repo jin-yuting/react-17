@@ -3,15 +3,12 @@ import './style.css'
 import Film from './component/Film'
 import Cinema from './component/Cinema'
 import Center from './component/Center'
+import Tabbar from './component/Tabbar'
+import Navbar from './component/Navbar'
 
 export default class App extends Component {
-  state = {
-    list:[
-      {id:1,text:'电影'},
-      {id:1,text:'影院'},
-      {id:1,text:'我的'},
-    ],
-    current:0
+  state ={
+    current: 0
   }
   which(){
     switch(this.state.current){
@@ -28,25 +25,24 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Navbar myevent={()=>{
+          this.setState({
+            current: 2
+          })
+        }}></Navbar>
         {
           // 表达式-支持函数表达式
           this.which()
         }
-        <ul>
-          {
-            this.state.list.map( (item,index)=>
-            <li key={index} className={this.state.current === index?'active':''} onClick={()=>this.handleClick(index)}>
-            {item.text}
-            </li>)
+        <Tabbar myevent={
+          (index)=>{
+            this.setState({
+              current: index
+            })
           }
-        </ul>
-       
+        } current={this.state.current}></Tabbar>
       </div>
     )
   }
-  handleClick(index){
-    this.setState({
-      current: index
-    })
-  }
+  
 }

@@ -15,11 +15,11 @@ class Navbar extends Component{
     return(<div style={styleObj}>Navbar</div>)
   }
 }
-function Swiper(){
-  render(){
-    return(<div className=''>Swiper</div>)
-  }
-}
+// function Swiper() {
+//   render(){
+//     return(<div className=''>Swiper</div>)
+//   }
+// }
 const Tabbar= ()=><div>Tabbar</div>
 
 export default class Nesting extends Component {
@@ -27,7 +27,7 @@ export default class Nesting extends Component {
     return (
       <div>
         <Navbar></Navbar>
-        <Swiper></Swiper>
+        {/* <Swiper></Swiper> */}
         <Tabbar></Tabbar>
       </div>
     )

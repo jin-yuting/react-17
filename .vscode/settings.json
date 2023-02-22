@@ -1,0 +1,7 @@
+{
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "files.associations": {
+    "emmet.triggerExpansionOnTab": "true",
+    "files.associations": "\"*.js\": \"html\""
+  }
+}

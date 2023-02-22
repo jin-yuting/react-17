@@ -32,14 +32,14 @@ export default class Cinema extends Component {
           })
           }} />
 
-          {
+          {/* {
             this.getCinemaList.map((item,index)=>
               <dl key={index}>
                 <dt>{item.name}</dt>
                 <dd>{item.address}</dd>
               </dl>
             )
-          }
+          } */}
       </div>
     )
   }
