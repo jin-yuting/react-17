@@ -1,24 +1,36 @@
 import React, { Component } from 'react'
-
+const GlobalContext = React.createContext()
 class FilmItem extends Component {
   render() {
     let {name,poster} = this.props
     return (
-      <div style={{overflow:'hidden',marginBottom:'10px'}} onClick={()=>{
-        this.props.onEvent(name)
-      }}>
-        <img style={{width:'100px',height:'100px',float:'left'}} src={poster} alt={name} />
-        <h4>{name}</h4>
-      </div>
+      <GlobalContext.Consumer>
+        {
+          (value)=>
+            <div style={{overflow:'hidden',marginBottom:'10px'}} onClick={()=>{
+              value.changeinfo(name)
+            }}>
+              <img style={{width:'100px',height:'100px',float:'left'}} src={poster} alt={name} />
+              <h4>{name}</h4>
+            </div>
+        }
+      </GlobalContext.Consumer>
     )
   }
 }
 class FilmDetail extends Component {
   render() {
     return (
-      <div style={{position:'fixed',right:'0',top:'100px',width:'250px',height:'300px',background:'#ccc'}}>
-        <span>{this.props.value}</span>
-      </div>
+      <GlobalContext.Consumer>
+        {
+          (value)=>
+            <div style={{position:'fixed',right:'0',top:'100px',width:'250px',height:'300px',background:'#ccc'}}>
+            <span>{value.info}</span>
+          </div>
+        
+        }
+      </GlobalContext.Consumer>
+      
     )
   }
 
@@ -74,18 +86,24 @@ export default class App extends Component {
  
   render() {
     return (
+      // 供应商
+      <GlobalContext.Provider value={{
+        info: this.state.info,
+        changeinfo:(value)=>{
+          this.setState({
+            info:value
+          })
+        }
+      }}>
       <div>
         {
           this.state.filmListData.map((item)=>
-            <FilmItem key={item.filmId} {...item} onEvent={(value)=>{
-              this.setState({
-                info: value
-              })
-            }}></FilmItem>
+            <FilmItem key={item.filmId} {...item} ></FilmItem>
           )
         }
         <FilmDetail></FilmDetail>
       </div>
+      </GlobalContext.Provider>
     )
   }
 }
