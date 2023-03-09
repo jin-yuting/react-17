@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react'
-
 export default function App() {
   const [text,setText] = useState('linxi')
   useEffect(()=>{
